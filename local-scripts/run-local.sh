@@ -10,8 +10,10 @@ if [ $(docker network ls | grep scalability-bridge | wc -l) -eq 0 ]; then
 fi
 
 # Obtain the block device name of Jenkins root, for use in resource limits and querying io stats
-# ROOT_BLKDEV_NAME=$(docker run --rm -it tutum/influxdb lsblk -d -o NAME | tail -n 1 | tr -d '\r' | tr -d '\n')
-ROOT_BLKDEV_NAME=$(docker run --rm tutum/influxdb lsblk -d -o NAME | tail -n 1 | tr -d '\r' | tr -d '\n')
+# interactive version here:
+ROOT_BLKDEV_NAME=$(docker run --rm -it tutum/influxdb lsblk -d -o NAME | tail -n 1 | tr -d '\r' | tr -d '\n')
+# non-interactive version here:
+# ROOT_BLKDEV_NAME=$(docker run --rm tutum/influxdb lsblk -d -o NAME | tail -n 1 | tr -d '\r' | tr -d '\n')
 ROOT_BLKDEV="/dev/$ROOT_BLKDEV_NAME"
 
 echo "BLOCK DEVICE ID IS $ROOT_BLKDEV"
