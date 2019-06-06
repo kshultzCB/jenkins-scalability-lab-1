@@ -61,9 +61,9 @@ docker run --rm -d --network scalability-bridge \
 # "--tmpfs /tmp" would give more accurate performance, but creates a permissions issue and thinks freespace low
 # Cap add for sys ptrace is for syscall info
 
-# Get rid of -it since we are in ci. And also to make it work.
+# Get rid of -it since we are in ci. Switch to -d. 
 # docker run --cap-add=SYS_PTRACE --rm -it -h jenkins --name jenkins -l role=jenkins --network scalability-bridge \
-docker run --cap-add=SYS_PTRACE --rm -h jenkins --name jenkins -l role=jenkins --network scalability-bridge \
+docker run --cap-add=SYS_PTRACE --rm -d -h jenkins --name jenkins -l role=jenkins --network scalability-bridge \
   -e GIT_PRIVATE_KEY="$(cat $(pwd)/id_rsa)" \
   -p 127.0.0.1:8080:8080 -p 127.0.0.1:9011:9011 -p 127.0.0.1:50000:50000 \
   -v jenkins_home:/var/jenkins_home \
