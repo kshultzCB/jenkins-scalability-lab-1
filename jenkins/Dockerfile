@@ -14,7 +14,7 @@ USER jenkins
 
 # Recently, COPY --chown=...stopped working, so we do it in two steps now.
 COPY telegraf.conf /etc/telegraf/telegraf.conf
-RUN chown jenkins:jenkins telegraf.conf /etc/telegraf/telegraf.conf
+RUN chown jenkins:jenkins /etc/telegraf/telegraf.conf
 
 # Make tini launch helper script that invokes telegraf as well as Jenkins
 COPY full-start.sh /usr/local/bin/full-start.sh
@@ -35,16 +35,18 @@ RUN mkdir -p /usr/share/jenkins/ref/plugins \
     && /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 RUN echo 'placeholder' > /usr/share/jenkins/ref/plugins/placeholder.lock \
     && /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/minimal-plugins.txt
-COPY --chown=jenkins:jenkins CUSTOM-PLUGINS/*.*pi /usr/share/jenkins/ref/plugins/
+COPY CUSTOM-PLUGINS/*.*pi /usr/share/jenkins/ref/plugins/
+RUN chown -R jenkins:jenkins /usr/share/jenkins/ref/plugins/
 
 # Remove stale executor files and rename HPI files to JPI files to input custom versions
 RUN rm -f /usr/share/jenkins/ref/init.groovy.d/executors.groovy \
     && cd /usr/share/jenkins/ref/plugins/ \
     && for custom_plugin in $(ls *.hpi); do mv "$custom_plugin" "${custom_plugin%.hpi}.jpi"; done
-COPY --chown=jenkins:jenkins loadtestsetup.groovy /usr/share/jenkins/ref/init.groovy.d/loadtestsetup.groovy
+COPY loadtestsetup.groovy /usr/share/jenkins/ref/init.groovy.d/loadtestsetup.groovy
+RUN chown jenkins:jenkins /usr/share/jenkins/ref/init.groovy.d/loadtestsetup.groovy
 
 # prevent install wizard running, but tied to this version
-COPY --chown=jenkins:jenkins jenkins.* /usr/share/jenkins/ref/
+COPY jenkins.* /usr/share/jenkins/ref/
 
 # Below makes graphite metrics report more often and adds support for attaching a remote debugger
 # Becomes JENKINS_JAVA_OPTIONS in later Docker image versions
@@ -56,7 +58,9 @@ ENV JAVA_OPTS "-Dgraphite.metrics.intervalSeconds=10 -Dcom.sun.management.jmxrem
 # Note that we can't disable the setup wizard with: -Dhudson.Main.development=true -Djenkins.install.runSetupWizard=false -Djenkins.install.UpgradeWizard.show=false
 
 # Let's try copying a maven config over.
-COPY --chown=jenkins:jenkins jenkins.mvn.GlobalMavenConfig.xml /usr/share/jenkins/ref/
+COPY jenkins.mvn.GlobalMavenConfig.xml /usr/share/jenkins/ref/
+
 COPY --chown=jenkins:jenkins hudson.tasks.Maven.xml /usr/share/jenkins/ref/
+RUN chown -R jenkins:jenkins /usr/share/jenkins/ref/
 
 USER jenkins
