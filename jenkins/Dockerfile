@@ -17,14 +17,19 @@ COPY telegraf.conf /etc/telegraf/telegraf.conf
 RUN chown jenkins:jenkins telegraf.conf /etc/telegraf/telegraf.conf
 
 # Make tini launch helper script that invokes telegraf as well as Jenkins
-COPY --chown=jenkins:jenkins full-start.sh /usr/local/bin/full-start.sh
+COPY full-start.sh /usr/local/bin/full-start.sh
+RUN chown jenkins:jenkins /usr/local/bin/full-start.sh
+
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/full-start.sh"]
 
 # Plugin installs: custom plugins, test framework plugins + custom snapshots 
 # Lock files write is a workaround for a bug in plugin install file where it tries to remove nonexistent lock
 # Basic config - install custom and test framework plugins + custom snapshots
-COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt
-COPY --chown=jenkins:jenkins minimal-plugins.txt /usr/share/jenkins/ref/minimal-plugins.txt
+COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+RUN chown jenkins:jenkins /usr/share/jenkins/ref/plugins.txt
+COPY minimal-plugins.txt /usr/share/jenkins/ref/minimal-plugins.txt
+RUN chown jenkins:jenkins /usr/share/jenkins/ref/minimal-plugins.txt
+
 RUN mkdir -p /usr/share/jenkins/ref/plugins \
     && echo 'placeholder' > /usr/share/jenkins/ref/plugins/placeholder.lock \
     && /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
