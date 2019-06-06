@@ -11,9 +11,9 @@ fi
 
 # Obtain the block device name of Jenkins root, for use in resource limits and querying io stats
 # interactive version here:
-ROOT_BLKDEV_NAME=$(docker run --rm -it tutum/influxdb lsblk -d -o NAME | tail -n 1 | tr -d '\r' | tr -d '\n')
+# ROOT_BLKDEV_NAME=$(docker run --rm -it tutum/influxdb lsblk -d -o NAME | tail -n 1 | tr -d '\r' | tr -d '\n')
 # non-interactive version here:
-# ROOT_BLKDEV_NAME=$(docker run --rm tutum/influxdb lsblk -d -o NAME | tail -n 1 | tr -d '\r' | tr -d '\n')
+ROOT_BLKDEV_NAME=$(docker run --rm tutum/influxdb lsblk -d -o NAME | tail -n 1 | tr -d '\r' | tr -d '\n')
 ROOT_BLKDEV="/dev/$ROOT_BLKDEV_NAME"
 
 echo "BLOCK DEVICE ID IS $ROOT_BLKDEV"
@@ -60,7 +60,10 @@ docker run --rm -d --network scalability-bridge \
 # Run jenkins, specifying a named volume makes it persistent even after container dies
 # "--tmpfs /tmp" would give more accurate performance, but creates a permissions issue and thinks freespace low
 # Cap add for sys ptrace is for syscall info
-docker run --cap-add=SYS_PTRACE --rm -it -h jenkins --name jenkins -l role=jenkins --network scalability-bridge \
+
+# Get rid of -it since we are in ci. And also to make it work.
+# docker run --cap-add=SYS_PTRACE --rm -it -h jenkins --name jenkins -l role=jenkins --network scalability-bridge \
+docker run --cap-add=SYS_PTRACE --rm -h jenkins --name jenkins -l role=jenkins --network scalability-bridge \
   -e GIT_PRIVATE_KEY="$(cat $(pwd)/id_rsa)" \
   -p 127.0.0.1:8080:8080 -p 127.0.0.1:9011:9011 -p 127.0.0.1:50000:50000 \
   -v jenkins_home:/var/jenkins_home \
