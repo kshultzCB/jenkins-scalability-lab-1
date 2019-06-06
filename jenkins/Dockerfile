@@ -13,7 +13,7 @@ RUN curl -o /tmp/telegraf.deb https://dl.influxdata.com/telegraf/releases/telegr
 USER jenkins
 
 # Recently, COPY --chown=...stopped working, so we do it in two steps now.
-COPY jenkins:jenkins telegraf.conf /etc/telegraf/telegraf.conf
+COPY telegraf.conf /etc/telegraf/telegraf.conf
 RUN chown jenkins:jenkins telegraf.conf /etc/telegraf/telegraf.conf
 
 # Make tini launch helper script that invokes telegraf as well as Jenkins
