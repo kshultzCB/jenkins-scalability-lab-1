@@ -5,7 +5,7 @@ MAINTAINER kshultz
 # Install telegraf for monitoring && set up telegraf as sudoer so they can launch telegraf as root for extra disk stats
 # Also you need openjdk-8-dbg/stable to get the debugging symbols for heap dumps
 USER root
-RUN apt-get update && apt-get install -y sudo bc openjdk-8-dbg/stable \
+RUN apt-get update && apt-get install -y openjdk-8-dbg \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /var/tmp/* \
     && echo 'telegraf ALL=(root) NOPASSWD:ALL' >> /etc/sudoers 
 RUN curl -o /tmp/telegraf.deb https://dl.influxdata.com/telegraf/releases/telegraf_1.3.5-1_amd64.deb \
