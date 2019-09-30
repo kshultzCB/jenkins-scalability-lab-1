@@ -1,4 +1,4 @@
-FROM jenkinsci/jenkins:lts
+FROM jenkins/jenkins
 
 MAINTAINER kshultz
 
