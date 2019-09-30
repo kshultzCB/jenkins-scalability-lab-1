@@ -12,7 +12,7 @@ pipeline-stage-step:latest
 pipeline-stage-tags-metadata:latest
 pipeline-stage-view:latest
 scm-api:latest
-script-security:latest
+script-security:1.63
 workflow-aggregator:2.5
 workflow-api:latest
 workflow-basic-steps:latest
