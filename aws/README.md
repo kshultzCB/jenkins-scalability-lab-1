@@ -1,5 +1,4 @@
 # Jenkins Scalability Lab in AWS
-====
 
 For all kinds of performance tests,
 it is recommended to use a Hydra installation in AWS.
@@ -67,6 +66,8 @@ All of these can run the latest Amazon Linux 2. You'll need to install git, via 
       * within-vpc communication
 2. Launch as many Swarm agent host VMs as needed
 3. Save IP addresses of created machines to `aws/settings.sh`
+    * `IP_JENKINS_MASTER`: The IP address of the hydra-jenkins instance
+    * `IP_UTIL_CONTAINERS`: The IP address of the hydra-util host
 4. Configure other settings as needed
 5. Commit changes in this very repository (as in, the scalability lab repository you're reading about right now), and push it to your branch. These settings will be used in all further operations.
 
