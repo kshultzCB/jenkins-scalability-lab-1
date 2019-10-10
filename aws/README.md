@@ -1,4 +1,3 @@
-= Jenkins Scalability Lab in AWS
 :toc: preamble
 :toclevels: 3
 ifdef::env-github[]
@@ -10,7 +9,7 @@ ifdef::env-github[]
 endif::[]
 
 
-Jenkins Scalability Lab in AWS
+= Jenkins Scalability Lab in AWS
 ====
 
 For all kinds of performance tests,
@@ -88,7 +87,7 @@ All of these can run the latest Amazon Linux 2.
 
 1. SSH to `hydra-jenkins`, configure Git and Checkout this repository. 
 
-    TIP: Make sure you are using the branch you specified above, in _Launching instances: Step 5_.
+    :bulb: TIP: Make sure you are using the branch you specified above, in _Launching instances: Step 5_.
 
 2. Run the `instance-preconfigure.sh` script
 3. Logout and log back in
