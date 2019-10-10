@@ -1,15 +1,4 @@
-:toc: preamble
-:toclevels: 3
-ifdef::env-github[]
-:tip-caption: :bulb:
-:note-caption: :information_source:
-:important-caption: :heavy_exclamation_mark:
-:caution-caption: :fire:
-:warning-caption: :warning:
-endif::[]
-
-
-= Jenkins Scalability Lab in AWS
+# Jenkins Scalability Lab in AWS
 ====
 
 For all kinds of performance tests,
@@ -32,7 +21,7 @@ The environment consists of 3 VMs:
 # Manual AWS setup
 
 ## Instance configuration
-All of these can run the latest Amazon Linux 2.
+All of these can run the latest Amazon Linux 2. You'll need to install git, via `sudo yum install git`.
 
 * Jenkins basic - c5.xlarge (4 core, 8 GB RAM)
   * Volume and script settings determine the storage performance
