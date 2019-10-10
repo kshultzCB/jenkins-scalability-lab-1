@@ -1,3 +1,15 @@
+= Jenkins Scalability Lab in AWS
+:toc: preamble
+:toclevels: 3
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+
 Jenkins Scalability Lab in AWS
 ====
 
@@ -68,13 +80,16 @@ All of these can run the latest Amazon Linux 2.
 2. Launch as many Swarm agent host VMs as needed
 3. Save IP addresses of created machines to `aws/settings.sh`
 4. Configure other settings as needed
-5. Commit changes in the repository and push it to your branch which will be used in all further operations.
+5. Commit changes in this very repository (as in, the scalability lab repository you're reading about right now), and push it to your branch. These settings will be used in all further operations.
 
 ## Step 2. Deploy Hydra
 
 ### Jenkins Master
 
-1. SSH to `hydra-jenkins`, configure Git and Checkout this repository
+1. SSH to `hydra-jenkins`, configure Git and Checkout this repository. 
+
+    TIP: Make sure you are using the branch you specified above, in _Launching instances: Step 5_.
+
 2. Run the `instance-preconfigure.sh` script
 3. Logout and log back in
 4. Run the `local/build-local.sh` script to build Docker containers
