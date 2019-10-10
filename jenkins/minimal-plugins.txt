@@ -6,6 +6,6 @@ random-job-builder:1.0
 ssh-credentials:latest
 ssh-slaves:latest
 support-core:latest
-swarm:3.4
+swarm:3.17
 workflow-durable-task-step:latest
 workflow-multibranch:latest
