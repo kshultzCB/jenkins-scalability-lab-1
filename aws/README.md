@@ -75,9 +75,8 @@ All of these can run the latest Amazon Linux 2. You'll need to install git, via 
 
 ### Jenkins Master
 
-[WARNING]
-====
-*Need a better way to install maven on Amazon Linux*. The usual yum methods like 
+
+:bulb: *TODO: Need a better way to install maven on Amazon Linux*. The usual yum methods like 
 [this one](https://docs.aws.amazon.com/neptune/latest/userguide/iam-auth-connect-prerq.html) give 
 a pretty old version. Using sdkman seems a lot better, but I don't want to commit this to 
 our instructions. Sometime in the future get.sdkman.io could be anything.
@@ -86,7 +85,6 @@ curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 sdk install maven
 ```
-====
 
 1. SSH to `hydra-jenkins`, configure Git and Checkout this repository. 
 
