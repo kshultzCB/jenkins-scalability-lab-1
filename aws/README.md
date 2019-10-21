@@ -82,6 +82,9 @@ All of these can run the latest Amazon Linux 2. You'll need to install git, via 
 2. Run the `instance-preconfigure.sh` script
 3. Logout and log back in
 4. Run the `local/build-local.sh` script to build Docker containers
+
+    :bulb: TIP: I don't think item 5 is necessary, suspect typo. Let's see.
+
 5. Run the `util-containers/launch-util-containers.sh` script
 6. Download `id_rsa` and `id_rsa.pub` from `/usr/share/jenkins/ref/` and save them somewhere
    (e.g. in [secrets-store-ops](https://github.com/cloudbees/secrets-store-ops)).
