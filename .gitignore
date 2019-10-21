@@ -38,3 +38,6 @@ out
 *.war
 *.ear
 *.rar
+
+# A local directory for SSH keys if you want to store them
+keys
