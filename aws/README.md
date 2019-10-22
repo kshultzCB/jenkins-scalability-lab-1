@@ -79,7 +79,10 @@ All of these can run the latest Amazon Linux 2. You'll need to install git, via 
 :bulb: *TODO: Need a better way to install maven on Amazon Linux*. The usual yum methods like 
 [this one](https://docs.aws.amazon.com/neptune/latest/userguide/iam-auth-connect-prerq.html) give 
 a pretty old version. Using sdkman seems a lot better, but I don't want to commit this to 
-our instructions. Sometime in the future get.sdkman.io could be anything.
+our instructions. Sometime in the future, https://get.sdkman.io could be anything and it seems 
+ill advised to just automatically run some script on some website. 
+
+But for right now this worked awesome and I loved it.
 ```
 curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -94,9 +97,12 @@ sdk install maven
 3. Logout and log back in
 4. Run the `local/build-local.sh` script to build Docker containers
 
-    :bulb: TIP: I don't think item 5 is necessary, suspect typo. Let's see.
+5. Run the `jenkins-master/launch-jenkins.sh` script ~~`util-containers/launch-util-containers.sh` script~~
 
-5. Run the `util-containers/launch-util-containers.sh` script
+5. Run the `jenkins-master/launch-jenkins.sh` script
+
+    :bulb: TIP: As written these files did not get copied. 
+
 6. Download `id_rsa` and `id_rsa.pub` from `/usr/share/jenkins/ref/` and save them somewhere
    (e.g. in [secrets-store-ops](https://github.com/cloudbees/secrets-store-ops)).
    They will be used to setup Git Server.
